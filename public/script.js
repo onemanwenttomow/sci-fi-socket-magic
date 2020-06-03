@@ -57,9 +57,8 @@ socket.on('pokemon from server', ({id}) => {
     const pokemonObj = pokemonArray.filter(pokemon => pokemon.id == id)[0];
     console.log('pokemonObj: ',pokemonObj);
     const html = Handlebars.templates.cards(pokemonObj);
-    console.log('html: ',html);
     pokemonContainer.innerHTML = html;
-
+    document.querySelector('.card').classList.add('card-fly-in');
 });
 
 
