@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.image-container {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.image-container img {
+    width: 200px;
+    flex-shrink: 0;
+    transition: all 1s;
+}
+
+.fly-away {
+    transform: translateY(-200px);
+}
