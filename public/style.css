@@ -32,9 +32,9 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    transition: all 2s;
 }
 .card {
+    transition: all 1s;
     top: -1000px;
     position: relative;
     background-color: #252a34;
