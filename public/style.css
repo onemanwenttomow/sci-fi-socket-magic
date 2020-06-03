@@ -28,12 +28,15 @@ h2 {
     font-weight: 200;
     text-transform: capitalize;
 }
-.container {
+.desktop-image-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    transition: all 2s;
 }
 .card {
+    top: -1000px;
+    transform: translateY(1000px);
     position: relative;
     background-color: #252a34;
     color: #eaeaea;
