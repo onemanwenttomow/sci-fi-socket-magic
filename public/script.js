@@ -58,7 +58,9 @@ socket.on('pokemon from server', ({id}) => {
     console.log('pokemonObj: ',pokemonObj);
     const html = Handlebars.templates.cards(pokemonObj);
     pokemonContainer.innerHTML = html;
-    document.querySelector('.card').classList.remove('card-fly-in');
+    setTimeout(()=> {
+        document.querySelector('.card').style.top = 0;
+    }, 100);
 });
 
 
