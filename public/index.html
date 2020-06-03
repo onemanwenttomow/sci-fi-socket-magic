@@ -7,13 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Testing</h1>
+    <h1>Pokemon Sci-fi Magic</h1>
 
-    <div class="image-container">
-        
-    </div>
+    <p class="desktop">You need to visit this site on your phone (keep this window open).</p>
+
+    <div class="desktop-image-container"></div>
+
+    <div class="image-container"></div>
+
+    <script id="cards" type="text/x-handlebars-template">
+        <div class="card">
+            <img src={{sprites.front_default}} alt="">
+            <h2>{{name}}</h2>
+            <section>
+                <div class="properties">Type:</div>
+                <div class="values">
+                    {{#types}}
+                        <p>{{type.name}}</p>
+                    {{/types}}
+                </div>
+            </section>
+            <section>
+                <div class="properties">Abilities:</div>
+                <div class="values">
+                    {{#abilities}}
+                        <p>{{ability.name}}</p>
+                    {{/abilities}}
+                </div>
+            </section>
+            <section>
+                <div class="properties">Weight:</div>
+                <div class="values">
+                    <p>{{weight}}</p>
+                </div>
+            </section>
+        </div>
+
+    </script>
     
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
