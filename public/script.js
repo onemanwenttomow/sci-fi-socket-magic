@@ -49,7 +49,7 @@ function getIndividualPokemon({results}) {
 
 function addImage(individualPokemon) {
     let pokeImage = document.createElement('img');
-    pokeImage.srcset = individualPokemon.sprites.front_default;
+    pokeImage.src = individualPokemon.sprites.front_default;
     pokeImage.id = individualPokemon.id;
     imageContainer.append(pokeImage);
 }
@@ -76,11 +76,7 @@ socket.on('pokemon from server', ({id}) => {
 function isMobile() {
     var match = window.matchMedia || window.msMatchMedia;
     if (match) {
-        var mq = match('(pointer:coarse)');
-        // initial check if we are in landscape on
-        if (mq.matches && window.innerHeight < window.innerWidth) {
-            onMobLandscape = true;
-        }
+        var mq = match('(pointer:coarse)');      
         return mq.matches || window.innerWidth < 600;
     }
     return false;
