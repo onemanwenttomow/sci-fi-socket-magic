@@ -4,7 +4,7 @@ const socket = io();
 let touchY = 0;
 const pokemonArray = [];
 let currentPokemonDispatched = false;
-
+let onMobile = isMobile();
 initHandlebars();
 
 imageContainer.addEventListener('touchstart', handleTouchStart);
@@ -62,13 +62,29 @@ socket.on('pokemon from server', ({id}) => {
     let child = document.createElement('div');
     child.innerHTML = html;
     child.id = "pokemon" + id;
-    console.log('child: ',child);
     pokemonContainer.append(child);
-    console.log('child.firstChild ',child.children);
     setTimeout(()=> {
         child.children[0].style.top = 0;
     }, 100);
+    window.scrollTo({
+        'behavior': 'smooth',
+        'top': document.body.clientHeight - window.innerHeight
+    });
 });
+
+
+function isMobile() {
+    var match = window.matchMedia || window.msMatchMedia;
+    if (match) {
+        var mq = match('(pointer:coarse)');
+        // initial check if we are in landscape on
+        if (mq.matches && window.innerHeight < window.innerWidth) {
+            onMobLandscape = true;
+        }
+        return mq.matches || window.innerWidth < 600;
+    }
+    return false;
+}
 
 function initHandlebars() {
     Handlebars.templates = Handlebars.templates || {};

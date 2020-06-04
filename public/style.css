@@ -4,6 +4,10 @@
     font-family: "Raleway", sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: linear-gradient(to right bottom, #08d9d6, #eaeaea);
     min-height: 100vh;
