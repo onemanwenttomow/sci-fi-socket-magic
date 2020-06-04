@@ -19,28 +19,23 @@
         <div class="card">
             <img src={{sprites.front_default}} alt="">
             <h2>{{name}}</h2>
-            <section>
-                <div class="properties">Type:</div>
-                <div class="values">
-                    {{#types}}
-                        <p>{{type.name}}</p>
-                    {{/types}}
-                </div>
-            </section>
-            <section>
-                <div class="properties">Abilities:</div>
-                <div class="values">
-                    {{#abilities}}
-                        <p>{{ability.name}}</p>
-                    {{/abilities}}
-                </div>
-            </section>
-            <section>
-                <div class="properties">Weight:</div>
-                <div class="values">
-                    <p>{{weight}}</p>
-                </div>
-            </section>
+            <div class="properties type">Type:</div>
+            <div class="values type-values">
+                {{#types}}
+                    <p>{{type.name}}</p>
+                {{/types}}
+            </div>
+        
+            <div class="properties abilities">Abilities:</div>
+            <div class="values abilities-values">
+                {{#abilities}}
+                    <p>{{ability.name}}</p>
+                {{/abilities}}
+            </div>
+            <div class="properties weight">Weight:</div>
+            <div class="values weight-values">
+                <p>{{weight}}</p>
+            </div>
         </div>
 
     </script>
