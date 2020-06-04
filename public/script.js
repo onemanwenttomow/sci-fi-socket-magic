@@ -22,12 +22,13 @@ function handleTouchEnd() {
 
 function handleTouchMove(e) {
     // need to check if there is an image. if not, dont emit...
+    console.log('e.target.id: ',e.target.id);
     const distanceSwiped = touchY -  e.changedTouches[0].pageY;
-    if (currentPokemonDispatched || distanceSwiped < 60) {
+    if (currentPokemonDispatched || distanceSwiped < 60 || !e.target.id) {
         return;
     }
     e.target.classList.add('fly-away');
-    e.target.id && socket.emit('pokemon to add', {id: e.target.id});
+    socket.emit('pokemon to add', {id: e.target.id});
     currentPokemonDispatched = true;
 }
 
