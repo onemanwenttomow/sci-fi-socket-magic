@@ -1,37 +1,35 @@
 const imageContainer = document.querySelector('.image-container');
 const pokemonContainer = document.querySelector('.desktop-image-container');
 const socket = io();
-let pokemonDispatched = false;
 let touchY = 0;
+const pokemonArray = [];
+let currentPokemonDispatched = false;
 
 initHandlebars();
 
+imageContainer.addEventListener('touchstart', handleTouchStart);
+imageContainer.addEventListener('touchend',handleTouchEnd);
+imageContainer.addEventListener('touchmove',handleTouchMove);
 
-// check to see if swipe up happening... if so add class to make image move offscreen.
-
-imageContainer.addEventListener('touchstart', e => {
-    console.log("touch start!", e);
+function handleTouchStart(e) {
     touchY = e.changedTouches[0].pageY;
-});
+}
 
-imageContainer.addEventListener('touchend', e => {
-    console.log("touch end!", e);
+function handleTouchEnd() {
     touchY = 0;
-});
+    currentPokemonDispatched = false;
+}
 
-imageContainer.addEventListener('touchmove', e => {
+function handleTouchMove(e) {
     const distanceSwiped = touchY -  e.changedTouches[0].pageY;
-    console.log('distanceSwiped: ',distanceSwiped);
-    if (pokemonDispatched || distanceSwiped < 60) {
+    if (currentPokemonDispatched || distanceSwiped < 60) {
         return;
     }
-    console.log("touch move!!!", e.changedTouches[0].pageY);
     e.target.classList.add('fly-away');
     socket.emit('pokemon to add', {id: e.target.id});
-    pokemonDispatched = true;
-});
+    currentPokemonDispatched = true;
+}
 
-const pokemonArray = [];
 function fetchPokemon(){
     fetch("https://pokeapi.co/api/v2/pokemon?limit=10")
         .then(response => response.json())
@@ -43,31 +41,34 @@ function getIndividualPokemon({results}) {
         fetch(`https://pokeapi.co/api/v2/pokemon/${results[i].name}`)
             .then(response => response.json())
             .then(individualPokemon => {
-                // console.log('individualPokemon: ',individualPokemon);
-                let pokeImage = document.createElement('img');
-                pokeImage.srcset = individualPokemon.sprites.front_default;
-                pokeImage.id = individualPokemon.id;
-                imageContainer.append(pokeImage);
+                addImage(individualPokemon);
                 pokemonArray.push(individualPokemon);
             });
     }
 }
 
+function addImage(individualPokemon) {
+    let pokeImage = document.createElement('img');
+    pokeImage.srcset = individualPokemon.sprites.front_default;
+    pokeImage.id = individualPokemon.id;
+    imageContainer.append(pokeImage);
+}
+
 fetchPokemon();
 
-
-
 socket.on('pokemon from server', ({id}) => {
-    console.log('id from server: ',id);
     const pokemonObj = pokemonArray.filter(pokemon => pokemon.id == id)[0];
-    console.log('pokemonObj: ',pokemonObj);
     const html = Handlebars.templates.cards(pokemonObj);
-    pokemonContainer.innerHTML = html;
+    let child = document.createElement('div');
+    child.innerHTML = html;
+    child.id = "pokemon" + id;
+    console.log('child: ',child);
+    pokemonContainer.append(child);
+    console.log('child.firstChild ',child.children);
     setTimeout(()=> {
-        document.querySelector('.card').style.top = 0;
+        child.children[0].style.top = 0;
     }, 100);
 });
-
 
 function initHandlebars() {
     Handlebars.templates = Handlebars.templates || {};
@@ -77,5 +78,4 @@ function initHandlebars() {
     Array.prototype.slice.call(templates).forEach(function(script) {
         Handlebars.templates[script.id] = Handlebars.compile(script.innerHTML);
     });
-
 }

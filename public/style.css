@@ -6,8 +6,8 @@
 
 body {
     background-color: #08d9d6;
-    height: 100vh;
-    overflow: hidden;
+    /* height: 100vh; */
+    /* overflow: hidden; */
 }
 img {
     border-top-right-radius: 10px;
@@ -33,7 +33,7 @@ h2 {
 .desktop-image-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 .card {
     transition: all 0.3s;
