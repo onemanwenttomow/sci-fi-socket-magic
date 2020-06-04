@@ -6,6 +6,8 @@
 
 body {
     background-color: #08d9d6;
+    height: 100vh;
+    overflow: hidden;
 }
 img {
     border-top-right-radius: 10px;
