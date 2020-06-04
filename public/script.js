@@ -31,7 +31,7 @@ function handleTouchMove(e) {
 }
 
 function fetchPokemon(){
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=10")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
         .then(response => response.json())
         .then(allpokemon => getIndividualPokemon(allpokemon));
 }
