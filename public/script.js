@@ -2,6 +2,7 @@ const imageContainer = document.querySelector('.image-container');
 const pokemonContainer = document.querySelector('.desktop-image-container');
 const socket = io();
 let pokemonDispatched = false;
+let touchY = 0;
 
 initHandlebars();
 
@@ -10,14 +11,18 @@ initHandlebars();
 
 imageContainer.addEventListener('touchstart', e => {
     console.log("touch start!", e);
+    touchY = e.changedTouches[0].pageY;
 });
 
 imageContainer.addEventListener('touchend', e => {
     console.log("touch end!", e);
+    touchY = 0;
 });
 
 imageContainer.addEventListener('touchmove', e => {
-    if (pokemonDispatched) {
+    const distanceSwiped = touchY -  e.changedTouches[0].pageY;
+    console.log('distanceSwiped: ',distanceSwiped);
+    if (pokemonDispatched || distanceSwiped < 60) {
         return;
     }
     console.log("touch move!!!", e.changedTouches[0].pageY);
@@ -62,13 +67,6 @@ socket.on('pokemon from server', ({id}) => {
         document.querySelector('.card').style.top = 0;
     }, 100);
 });
-
-
-// touchmove handler
-function process_touchmove(ev) {
-    // Set call preventDefault()
-    ev.preventDefault();
-}
 
 
 function initHandlebars() {
