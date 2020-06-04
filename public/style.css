@@ -98,6 +98,7 @@ h2 {
     display: flex;
     align-items: center;
     padding-left: 10px;
+    min-height: 86px;
 }
 
 .type {
