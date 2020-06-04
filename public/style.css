@@ -36,7 +36,7 @@ h2 {
     justify-content: space-around;
 }
 .card {
-    transition: all 1s;
+    transition: all 0.3s;
     top: 100vh;
     position: relative;
     background-color: #252a34;
@@ -92,7 +92,7 @@ section {
     .image-container img {
         width: 200px;
         flex-shrink: 0;
-        transition: all 1s;
+        transition: all 0.3s;
     }
 
     .desktop-image-container, .desktop {
