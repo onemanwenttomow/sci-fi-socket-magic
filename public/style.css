@@ -159,6 +159,7 @@ h2 {
         padding-top: 25vh;
         padding-bottom: 25vh;
         width: 200px;
+        height: auto;
         flex-shrink: 0;
         transition: all 0.3s;
     }
