@@ -5,6 +5,8 @@ const io = require("socket.io")(server,  {origins: '*:*'});
 
 app.use(express.static('public'));
 
+console.log('process.env.NODE_ENV: ',process.env.NODE_ENV);
+
 if (process.env.NODE_ENV == "production") {
     app.use((req, res, next) => {
         console.log('req.headers: ',req.headers);
