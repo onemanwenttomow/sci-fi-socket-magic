@@ -7,6 +7,7 @@ app.use(express.static('public'));
 
 if (process.env.NODE_ENV == "production") {
     app.use((req, res, next) => {
+        console.log('req.headers: ',req.headers);
         if (req.headers["x-forwarded-proto"].startsWith("https")) {
             return next();
         }
