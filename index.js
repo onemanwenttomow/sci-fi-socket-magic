@@ -5,6 +5,15 @@ const io = require("socket.io")(server,  {origins: '*:*'});
 
 app.use(express.static('public'));
 
+if (process.env.NODE_ENV == "production") {
+    app.use((req, res, next) => {
+        if (req.headers["x-forwarded-proto"].startsWith("https")) {
+            return next();
+        }
+        res.redirect(`https://${req.hostname}${req.url}`);
+    });
+}
+
 io.on('connection', function(socket) {
     console.log(`socket with the id ${socket.id} is now connected`);
 
