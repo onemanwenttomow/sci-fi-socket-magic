@@ -3,10 +3,6 @@ const app = express();
 const server = require('http').Server(app);
 const io = require("socket.io")(server,  {origins: '*:*'});
 
-app.use(express.static('public'));
-
-console.log('process.env.NODE_ENV: ',process.env.NODE_ENV);
-
 if (process.env.NODE_ENV == "production") {
     console.log('adding the following middleware...');
     app.use((req, res, next) => {
@@ -17,6 +13,11 @@ if (process.env.NODE_ENV == "production") {
         res.redirect(`https://${req.hostname}${req.url}`);
     });
 }
+
+app.use(express.static('public'));
+
+console.log('process.env.NODE_ENV: ',process.env.NODE_ENV);
+
 
 io.on('connection', function(socket) {
     console.log(`socket with the id ${socket.id} is now connected`);
